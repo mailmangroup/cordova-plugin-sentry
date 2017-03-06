@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-sentry" version="0.0.1">
+	<name>Cordova Sentry</name>
+	<author>Fergus Jordan</author>
+	<description>Crash reporting with Sentry</description>
+	<license>Apache 2.0</license>
+	<keywords>cordova,sentry</keywords>
+
+    <js-module src="www/sentry.js" name="Sentry">
+        <clobbers target="window.Sentry" />
+    </js-module>
+
+    <platform name="ios">
+
+        <dependency id="cordova-plugin-cocoapod-support" />
+        <pods-config ios-min-version="8.0" use-frameworks="true" />
+        <pod name="Sentry" />
+
+        <hook src="pod-hook.js" type="after_platform_add" />
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="Sentry">
+                <param name="ios-package" value="CDVSentry"/>
+                <param name="onload" value="true"/>
+            </feature>
+            <preference name="DSNSTRING" value="$DSNSTRING" />
+        </config-file>
+
+        <header-file src="src/ios/CDVSentry.h" />
+        <source-file src="src/ios/CDVSentry.m" />
+    </platform>
+</plugin>
