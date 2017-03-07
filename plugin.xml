@@ -35,8 +35,6 @@
         <pods-config ios-min-version="8.0" use-frameworks="true" />
         <pod name="Sentry" />
 
-        <hook src="pod-hook.js" type="after_prepare" />
-
         <config-file target="config.xml" parent="/*">
             <feature name="Sentry">
                 <param name="ios-package" value="CDVSentry"/>
