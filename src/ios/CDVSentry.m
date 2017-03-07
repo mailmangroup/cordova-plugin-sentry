@@ -26,7 +26,7 @@
     return [self.commandDelegate.settings objectForKey:[key lowercaseString]];
 }
 
-- (void)testCrash:(CDVInvokedUrlCommand*)command {
+- (void)forceCrash:(CDVInvokedUrlCommand*)command {
     [[SentryClient shared] crash];
 }
 

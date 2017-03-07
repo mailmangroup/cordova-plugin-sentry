@@ -5,9 +5,9 @@ var Sentry = {
 		cordova.exec( successCallback, errorCallback, 'Sentry', 'setUserData', [ arguments ] );
 	},
 
-	testCrash: function( successCallback, errorCallback ) {
+	forceCrash: function( successCallback, errorCallback ) {
 
-		cordova.exec( successCallback, errorCallback, 'Sentry', 'testCrash' );
+		cordova.exec( successCallback, errorCallback, 'Sentry', 'forceCrash' );
 	}
 }
 

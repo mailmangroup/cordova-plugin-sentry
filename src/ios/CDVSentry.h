@@ -2,7 +2,7 @@
 
 @interface CDVSentry : CDVPlugin
 
-- (void)testCrash:(CDVInvokedUrlCommand*)command;
+- (void)forceCrash:(CDVInvokedUrlCommand*)command;
 
 - (void)setUserData:(CDVInvokedUrlCommand*)command;
 

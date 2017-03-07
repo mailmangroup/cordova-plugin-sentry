@@ -1,0 +1,7 @@
+repositories {
+	jcenter()
+}
+
+dependencies {
+	compile 'com.joshdholtz.sentry:sentry-android:1.6.0'
+}

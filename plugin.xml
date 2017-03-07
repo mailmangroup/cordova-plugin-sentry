@@ -10,6 +10,25 @@
         <clobbers target="window.Sentry" />
     </js-module>
 
+    <platform name="android">
+        <source-file src="src/android/CDVSentry.java" target-dir="src/com/kawo/cordova/sentry" />
+
+        <framework src="src/android/sentry.gradle" custom="true" type="gradleReference" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Sentry">
+                <param name="android-package" value="com.kawo.cordova.sentry.CDVSentry" />
+                <param name="onload" value="true" />
+            </feature>
+            <preference name="DSNSTRING" value="$DSNSTRING" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+    </platform>
+
     <platform name="ios">
 
         <dependency id="cordova-plugin-cocoapod-support" />
