@@ -55,11 +55,3 @@ Sentry.setUserData({
 	name: 'Full Name'
 }, successCallback, errorCallback );
 ```
-
-### Force crash
-
-Force an app crash for testing:
-
-```
-Sentry.forceCrash( successCallback, errorCallback );
-```

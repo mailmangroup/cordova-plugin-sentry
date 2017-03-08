@@ -15,7 +15,6 @@ public class CDVSentry extends CordovaPlugin {
 
     private static final String TAG = "Sentry";
     private static final String ACTION_SET_USER_DATA = "setUserData";
-    private static final String ACTION_TEST_CRASH = "forceCrash";
 
     private static JSONObject USER = new JSONObject();
 
@@ -46,14 +45,7 @@ public class CDVSentry extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        if (ACTION_TEST_CRASH.equals(action)) {
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    forceCrashAction(callbackContext, args);
-                }
-            });
-            return true;
-        } else if (ACTION_SET_USER_DATA.equals(action)) {
+        if (ACTION_SET_USER_DATA.equals(action)) {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     setUserDataAction(callbackContext, args);
@@ -77,15 +69,6 @@ public class CDVSentry extends CordovaPlugin {
         JSONObject returnObj = new JSONObject();
         addProperty( returnObj, ACTION_SET_USER_DATA, arguments );
         callbackContext.success(returnObj);
-    }
-
-    private void forceCrashAction(CallbackContext callbackContext, JSONArray arguments) {
-
-        JSONObject returnObj = new JSONObject();
-        addProperty( returnObj, ACTION_TEST_CRASH, true );
-        callbackContext.success(returnObj);
-
-        throw new RuntimeException( "Force crash" );
     }
 
     private void addProperty(JSONObject obj, String key, Object value) {

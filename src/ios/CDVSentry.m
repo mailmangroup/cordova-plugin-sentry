@@ -26,10 +26,6 @@
     return [self.commandDelegate.settings objectForKey:[key lowercaseString]];
 }
 
-- (void)forceCrash:(CDVInvokedUrlCommand*)command {
-    [[SentryClient shared] crash];
-}
-
 - (void)setUserData:(CDVInvokedUrlCommand*)command {
 
     NSDictionary* attributes = command.arguments[0];
