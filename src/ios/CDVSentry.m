@@ -1,6 +1,6 @@
 #import "CDVSentry.h"
 #import <Cordova/CDVPlugin.h>
-@import Sentry;
+#import <Sentry/Sentry.h>
 
 @implementation CDVSentry
 
@@ -18,8 +18,13 @@
         @throw invalidSettingException;
     }
 
-    [SentryClient setShared:[[SentryClient alloc] initWithDsnString:dsnString]];
-    [[SentryClient shared] startCrashHandler];
+    NSError *error = nil;
+    SentryClient *client = [[SentryClient alloc] initWithDsn:dsnString didFailWithError:&error];
+    SentryClient.sharedClient = client;
+    [SentryClient.sharedClient startCrashHandlerWithError:&error];
+    if (nil != error) {
+        NSLog(@"%@", error);
+    }
 }
 
 - (NSString *)getConfigForKey:(NSString *)key {
@@ -39,7 +44,10 @@
     if (attributes[@"extraData"]) [extraData setObject:attributes[@"extraData"] forKey:@"Data"];
 
     if ( userId.length > 0 && userEmail.length > 0 ) {
-        [SentryClient shared].user = [[SentryUser alloc] initWithId:userId email:userEmail username:userName extra:@{@"is_admin": @NO}];
+        SentryClient.sharedClient.user = [[SentryUser alloc] initWithUserId:userId];
+        SentryClient.sharedClient.user.email = userEmail;
+        SentryClient.sharedClient.user.username = userName;
+        SentryClient.sharedClient.user.extra = extraData;
     } else {
         NSLog(@"[CDVSentry] ERROR - No user registered. You must supply an email and a userId");
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR]

@@ -33,7 +33,7 @@
 
         <dependency id="cordova-plugin-cocoapod-support" url="https://github.com/mailmangroup/cordova-plugin-cocoapods-support" />
         <pods-config ios-min-version="8.0" use-frameworks="true" />
-        <pod name="Sentry" />
+        <pod name="Sentry" git="https://github.com/getsentry/sentry-cocoa.git" tag="3.2.0" subspecs="Core,KSCrash" />
 
         <config-file target="config.xml" parent="/*">
             <feature name="Sentry">
