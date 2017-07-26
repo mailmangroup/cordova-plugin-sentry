@@ -40,7 +40,6 @@
     NSMutableDictionary* extraData = [[NSMutableDictionary alloc] init];
     
     [extraData setObject:userEmail forKey:@"Email"];
-    [extraData setObject:userName forKey:@"Name"];
     
     if (attributes[@"extraData"]) [extraData setObject:attributes[@"extraData"] forKey:@"Data"];
     
