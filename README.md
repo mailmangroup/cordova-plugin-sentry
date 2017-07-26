@@ -35,8 +35,6 @@ Note: the plugin adding a pod dependency can conflict with other plugins. Take n
 Comment out `CODE_SIGN_ENTITLEMENTS` in `build.xccproj`
 Reference: https://issues.apache.org/jira/browse/CB-12212
 
-Set Sentry Frameworks `Use Legacy Swift Language Version` to `Yes`
-
 Clean and build your project
 
 ## Usage
@@ -49,9 +47,11 @@ Send user data to Sentry to be reported with crash information:
 `email` and `userId` required
 
 ```
-Sentry.setUserData({
+window.Sentry && Sentry.setUserData({
 	email: 'name@example.com',
 	userId: 'xxxx',
-	name: 'Full Name'
+	extraData: {
+			name: 'Full Name'
+	}
 }, successCallback, errorCallback );
 ```
